@@ -29,17 +29,17 @@ function setupEventHandlers() {
     console.log('Format button clicked (inline)');
     const jsonText = document.getElementById('json-input').value.trim();
     if (!jsonText) {
-      showJsonNotification('warning', '请输入 JSON 文本');
+      window.showNotification('warning', '请输入 JSON 文本');
       return;
     }
     
     try {
       const result = formatJson(jsonText);
       updateJsonOutput(result, true);
-      showJsonNotification('success', 'JSON 格式化成功');
+      window.showNotification('success', 'JSON 格式化成功');
     } catch (error) {
       updateJsonOutput(`错误: ${error.message}`, false);
-      showJsonNotification('error', '无效的 JSON 格式');
+      window.showNotification('error', '无效的 JSON 格式');
     }
   });
   
@@ -48,17 +48,17 @@ function setupEventHandlers() {
     console.log('Minify button clicked (inline)');
     const jsonText = document.getElementById('json-input').value.trim();
     if (!jsonText) {
-      showJsonNotification('warning', '请输入 JSON 文本');
+      window.showNotification('warning', '请输入 JSON 文本');
       return;
     }
     
     try {
       const result = minifyJson(jsonText);
       updateJsonOutput(result, true);
-      showJsonNotification('success', 'JSON 压缩成功');
+      window.showNotification('success', 'JSON 压缩成功');
     } catch (error) {
       updateJsonOutput(`错误: ${error.message}`, false);
-      showJsonNotification('error', '无效的 JSON 格式');
+      window.showNotification('error', '无效的 JSON 格式');
     }
   });
   
@@ -67,7 +67,7 @@ function setupEventHandlers() {
     console.log('Remove escapes button clicked (inline)');
     const text = document.getElementById('json-input').value;
     if (!text) {
-      showJsonNotification('warning', '请输入需要处理的文本');
+      window.showNotification('warning', '请输入需要处理的文本');
       return;
     }
     
@@ -82,7 +82,7 @@ function setupEventHandlers() {
       updateJsonOutput(result, false);
     }
     
-    showJsonNotification('success', '转义符号已去除');
+    window.showNotification('success', '转义符号已去除');
   });
   
   // 添加转义符
@@ -90,13 +90,13 @@ function setupEventHandlers() {
     console.log('Add escapes button clicked (inline)');
     const text = document.getElementById('json-input').value;
     if (!text) {
-      showJsonNotification('warning', '请输入需要处理的文本');
+      window.showNotification('warning', '请输入需要处理的文本');
       return;
     }
     
     const result = addEscapes(text);
     updateJsonOutput(result, true);
-    showJsonNotification('success', '已添加转义符号');
+    window.showNotification('success', '已添加转义符号');
   });
   
   // 清空
@@ -105,7 +105,7 @@ function setupEventHandlers() {
     document.getElementById('json-input').value = '';
     updateJsonOutput('', false);
     document.getElementById('json-input').focus();
-    showJsonNotification('info', '已清空');
+    window.showNotification('info', '已清空');
   });
   
   // 复制结果
@@ -113,17 +113,17 @@ function setupEventHandlers() {
     console.log('Copy button clicked (inline)');
     const text = document.getElementById('json-output').textContent;
     if (!text) {
-      showJsonNotification('warning', '没有可复制的内容');
+      window.showNotification('warning', '没有可复制的内容');
       return;
     }
     
     navigator.clipboard.writeText(text)
       .then(() => {
-        showJsonNotification('success', '已复制到剪贴板');
+        window.showNotification('success', '已复制到剪贴板');
       })
       .catch(err => {
         console.error('复制失败:', err);
-        showJsonNotification('error', '复制失败');
+        window.showNotification('error', '复制失败');
       });
   });
   
@@ -283,17 +283,17 @@ function formatJsonHandler() {
   console.log('Format button clicked');
   const jsonText = window.jsonInput.value.trim();
   if (!jsonText) {
-    showJsonNotification('warning', '请输入 JSON 文本');
+    window.showNotification('warning', '请输入 JSON 文本');
     return;
   }
   
   try {
     const result = formatJson(jsonText);
     updateJsonOutput(result, true);
-    showJsonNotification('success', 'JSON 格式化成功');
+    window.showNotification('success', 'JSON 格式化成功');
   } catch (error) {
     updateJsonOutput(`错误: ${error.message}`, false);
-    showJsonNotification('error', '无效的 JSON 格式');
+    window.showNotification('error', '无效的 JSON 格式');
   }
 }
 
@@ -302,17 +302,17 @@ function minifyJsonHandler() {
   console.log('Minify button clicked');
   const jsonText = window.jsonInput.value.trim();
   if (!jsonText) {
-    showJsonNotification('warning', '请输入 JSON 文本');
+    window.showNotification('warning', '请输入 JSON 文本');
     return;
   }
   
   try {
     const result = minifyJson(jsonText);
     updateJsonOutput(result, true);
-    showJsonNotification('success', 'JSON 压缩成功');
+    window.showNotification('success', 'JSON 压缩成功');
   } catch (error) {
     updateJsonOutput(`错误: ${error.message}`, false);
-    showJsonNotification('error', '无效的 JSON 格式');
+    window.showNotification('error', '无效的 JSON 格式');
   }
 }
 
@@ -321,7 +321,7 @@ function removeEscapesHandler() {
   console.log('Remove escapes button clicked');
   const text = window.jsonInput.value;
   if (!text) {
-    showJsonNotification('warning', '请输入需要处理的文本');
+    window.showNotification('warning', '请输入需要处理的文本');
     return;
   }
   
@@ -336,7 +336,7 @@ function removeEscapesHandler() {
     updateJsonOutput(result, false);
   }
   
-  showJsonNotification('success', '转义符号已去除');
+  window.showNotification('success', '转义符号已去除');
 }
 
 // 添加转义符按钮事件处理函数
@@ -344,13 +344,13 @@ function addEscapesHandler() {
   console.log('Add escapes button clicked');
   const text = window.jsonInput.value;
   if (!text) {
-    showJsonNotification('warning', '请输入需要处理的文本');
+    window.showNotification('warning', '请输入需要处理的文本');
     return;
   }
   
   const result = addEscapes(text);
   updateJsonOutput(result, true);
-  showJsonNotification('success', '已添加转义符号');
+  window.showNotification('success', '已添加转义符号');
 }
 
 // 清空按钮事件处理函数
@@ -359,7 +359,7 @@ function clearJsonHandler() {
   window.jsonInput.value = '';
   updateJsonOutput('', false);
   window.jsonInput.focus();
-  showJsonNotification('info', '已清空');
+  window.showNotification('info', '已清空');
 }
 
 // 复制按钮事件处理函数
@@ -367,17 +367,17 @@ function copyJsonHandler() {
   console.log('Copy button clicked');
   const text = window.jsonOutput.textContent;
   if (!text) {
-    showJsonNotification('warning', '没有可复制的内容');
+    window.showNotification('warning', '没有可复制的内容');
     return;
   }
   
   navigator.clipboard.writeText(text)
     .then(() => {
-      showJsonNotification('success', '已复制到剪贴板');
+      window.showNotification('success', '已复制到剪贴板');
     })
     .catch(err => {
       console.error('复制失败:', err);
-      showJsonNotification('error', '复制失败');
+      window.showNotification('error', '复制失败');
     });
 }
 
@@ -630,60 +630,6 @@ function addIndentGuides(html) {
   }).join('\n');
 }
 
-// 显示通知
-function showNotification(type, message) {
-  // 移除所有现有的通知
-  const existingNotifications = document.querySelectorAll('.notification');
-  existingNotifications.forEach(notification => {
-    if (notification && notification.parentNode) {
-      notification.parentNode.removeChild(notification);
-    }
-  });
-
-  const notification = document.createElement('div');
-  notification.className = `notification ${type}`;
-  notification.textContent = message;
-  
-  document.body.appendChild(notification);
-  
-  // 2秒后自动消失
-  setTimeout(() => {
-    notification.classList.add('fadeout');
-    setTimeout(() => {
-      if (notification && notification.parentNode) {
-        notification.parentNode.removeChild(notification);
-      }
-    }, 300);
-  }, 2000);
-}
-
-// 显示JSON格式化工具的通知
-function showJsonNotification(type, message) {
-  // 移除所有现有的通知
-  const existingNotifications = document.querySelectorAll('.notification');
-  existingNotifications.forEach(notification => {
-    if (notification && notification.parentNode) {
-      notification.parentNode.removeChild(notification);
-    }
-  });
-
-  const notification = document.createElement('div');
-  notification.className = `notification ${type}`;
-  notification.textContent = message;
-  
-  document.body.appendChild(notification);
-  
-  // 2秒后自动消失
-  setTimeout(() => {
-    notification.classList.add('fadeout');
-    setTimeout(() => {
-      if (notification && notification.parentNode) {
-        notification.parentNode.removeChild(notification);
-      }
-    }, 300);
-  }, 2000);
-}
-
 // 在窗口加载完成后尝试初始化
 window.addEventListener('load', function() {
   console.log('Window load event fired');
@@ -827,16 +773,16 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const input = jsonInput.value.trim();
       if (!input) {
-        showNotification('warning', '请输入JSON文本');
+        window.showNotification('warning', '请输入JSON文本');
         return;
       }
       
       const parsed = JSON.parse(input);
       jsonOutput.textContent = JSON.stringify(parsed, null, 2);
-      showNotification('success', 'JSON格式化成功');
+      window.showNotification('success', 'JSON格式化成功');
     } catch (error) {
       jsonOutput.textContent = `错误: ${error.message}`;
-      showNotification('error', 'JSON格式错误');
+      window.showNotification('error', 'JSON格式错误');
     }
   });
 
@@ -845,17 +791,17 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const input = jsonInput.value.trim();
       if (!input) {
-        showNotification('warning', '请输入JSON文本');
+        window.showNotification('warning', '请输入JSON文本');
         return;
       }
       
       // 去除转义字符
       const unescaped = input.replace(/\\/g, '');
       jsonOutput.textContent = unescaped;
-      showNotification('success', '去除转义成功');
+      window.showNotification('success', '去除转义成功');
     } catch (error) {
       jsonOutput.textContent = `错误: ${error.message}`;
-      showNotification('error', '处理失败');
+      window.showNotification('error', '处理失败');
     }
   });
 
@@ -865,17 +811,35 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         const input = jsonInput.value.trim();
         if (!input) {
-          showNotification('warning', '请输入需要解码的文本');
+          window.showNotification('warning', '请输入需要解码的文本');
           return;
         }
         
         // URL解码
         const decoded = decodeURIComponent(input);
-        jsonOutput.textContent = decoded;
-        showNotification('success', 'URL解码成功');
+        
+        // 确保解码后的URL显示在右侧面板
+        if (jsonOutput) {
+          jsonOutput.style.display = 'block'; // 确保可见
+          jsonOutput.textContent = decoded;
+        } else {
+          const outputElement = document.getElementById('json-output');
+          if (outputElement) {
+            outputElement.style.display = 'block'; // 确保可见
+            outputElement.classList.add('result-output'); // 添加自定义样式类
+            outputElement.textContent = decoded;
+          }
+        }
+        
+        console.log('显示解码结果:', decoded);
+        
+        // 显示成功通知
+        window.showNotification('success', 'URL解码成功');
       } catch (error) {
-        jsonOutput.textContent = `错误: ${error.message}`;
-        showNotification('error', 'URL解码失败');
+        if (jsonOutput) {
+          jsonOutput.textContent = `错误: ${error.message}`;
+        }
+        window.showNotification('error', 'URL解码失败');
       }
     });
   }
@@ -884,23 +848,23 @@ document.addEventListener('DOMContentLoaded', () => {
   clearButton.addEventListener('click', () => {
     jsonInput.value = '';
     jsonOutput.textContent = '';
-    showNotification('success', '已清空');
+    window.showNotification('success', '已清空');
   });
 
   // 复制
   copyButton.addEventListener('click', () => {
     const output = jsonOutput.textContent;
     if (!output) {
-      showNotification('warning', '没有可复制的内容');
+      window.showNotification('warning', '没有可复制的内容');
       return;
     }
     
     navigator.clipboard.writeText(output)
       .then(() => {
-        showNotification('success', '已复制到剪贴板');
+        window.showNotification('success', '已复制到剪贴板');
       })
       .catch(() => {
-        showNotification('error', '复制失败');
+        window.showNotification('error', '复制失败');
       });
   });
 }); 
