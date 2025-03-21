@@ -75,64 +75,64 @@ chrome.webRequest.onBeforeRequest.addListener(
 );
 
 // 监听请求头
-chrome.webRequest.onBeforeSendHeaders.addListener(
-  function(details) {
-    if (!isRecording) return;
+// chrome.webRequest.onBeforeSendHeaders.addListener(
+//   function(details) {
+//     if (!isRecording) return;
     
-    const request = findRequest(details.requestId);
-    if (request) {
-      // 将请求头转换为对象格式
-      const headers = {};
-      details.requestHeaders.forEach(header => {
-        headers[header.name] = header.value;
-      });
+//     const request = findRequest(details.requestId);
+//     if (request) {
+//       // 将请求头转换为对象格式
+//       const headers = {};
+//       details.requestHeaders.forEach(header => {
+//         headers[header.name] = header.value;
+//       });
       
-      request.requestHeaders = headers;
-      updateRequest(request);
-    }
-  },
-  { urls: ["<all_urls>"] },
-  ["requestHeaders"]
-);
+//       request.requestHeaders = headers;
+//       updateRequest(request);
+//     }
+//   },
+//   { urls: ["<all_urls>"] },
+//   ["requestHeaders"]
+// );
 
 // 监听响应头
-chrome.webRequest.onHeadersReceived.addListener(
-  function(details) {
-    if (!isRecording) return;
+// chrome.webRequest.onHeadersReceived.addListener(
+//   function(details) {
+//     if (!isRecording) return;
     
-    const request = findRequest(details.requestId);
-    if (request) {
-      // 更新状态码
-      request.status = details.statusCode;
+//     const request = findRequest(details.requestId);
+//     if (request) {
+//       // 更新状态码
+//       request.status = details.statusCode;
       
-      // 将响应头转换为对象格式
-      const headers = {};
-      details.responseHeaders.forEach(header => {
-        headers[header.name] = header.value;
-      });
+//       // 将响应头转换为对象格式
+//       const headers = {};
+//       details.responseHeaders.forEach(header => {
+//         headers[header.name] = header.value;
+//       });
       
-      request.responseHeaders = headers;
-      updateRequest(request);
-    }
-  },
-  { urls: ["<all_urls>"] },
-  ["responseHeaders"]
-);
+//       request.responseHeaders = headers;
+//       updateRequest(request);
+//     }
+//   },
+//   { urls: ["<all_urls>"] },
+//   ["responseHeaders"]
+// );
 
 // 监听响应体
-chrome.webRequest.onCompleted.addListener(
-  function(details) {
-    if (!isRecording) return;
+// chrome.webRequest.onCompleted.addListener(
+//   function(details) {
+//     if (!isRecording) return;
     
-    const request = findRequest(details.requestId);
-    if (request) {
-      // 更新状态码
-      request.status = details.statusCode;
-      updateRequest(request);
-    }
-  },
-  { urls: ["<all_urls>"] }
-);
+//     const request = findRequest(details.requestId);
+//     if (request) {
+//       // 更新状态码
+//       request.status = details.statusCode;
+//       updateRequest(request);
+//     }
+//   },
+//   { urls: ["<all_urls>"] }
+// );
 
 // 添加请求到列表
 function addRequest(request) {
@@ -162,53 +162,53 @@ function notifyPanels(action, data) {
 }
 
 // 监听来自面板的消息
-chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-  console.log('Received message:', message);
+// chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+//   console.log('Received message:', message);
   
-  switch (message.action) {
-    case 'getRequests':
-      console.log('Sending requests:', capturedRequests);
-      sendResponse(capturedRequests);
-      break;
+//   switch (message.action) {
+//     case 'getRequests':
+//       console.log('Sending requests:', capturedRequests);
+//       sendResponse(capturedRequests);
+//       break;
       
-    case 'clearRequests':
-      capturedRequests = [];
-      processedRequestIds.clear();
-      recentUrls.clear();
-      console.log('Requests cleared');
-      sendResponse({ success: true });
-      break;
+//     case 'clearRequests':
+//       capturedRequests = [];
+//       processedRequestIds.clear();
+//       recentUrls.clear();
+//       console.log('Requests cleared');
+//       sendResponse({ success: true });
+//       break;
       
-    case 'toggleRecording':
-      isRecording = !isRecording;
-      console.log('Recording toggled:', isRecording);
-      // 通知所有面板记录状态已更改
-      notifyPanels('recordingStatusChanged', { isRecording });
-      sendResponse({ success: true, isRecording });
-      break;
+//     case 'toggleRecording':
+//       isRecording = !isRecording;
+//       console.log('Recording toggled:', isRecording);
+//       // 通知所有面板记录状态已更改
+//       notifyPanels('recordingStatusChanged', { isRecording });
+//       sendResponse({ success: true, isRecording });
+//       break;
       
-    case 'getRecordingStatus':
-      console.log('Sending recording status:', isRecording);
-      sendResponse({ isRecording });
-      break;
+//     case 'getRecordingStatus':
+//       console.log('Sending recording status:', isRecording);
+//       sendResponse({ isRecording });
+//       break;
       
-    case 'resendModifiedRequest':
-      resendRequest(message.request)
-        .then(response => {
-          console.log('Request resent successfully:', response);
-          sendResponse({ success: true, ...response });
-        })
-        .catch(error => {
-          console.error('Error resending request:', error);
-          sendResponse({ success: false, error: error.message });
-        });
-      return true; // 保持消息通道开放，等待异步响应
+//     case 'resendModifiedRequest':
+//       resendRequest(message.request)
+//         .then(response => {
+//           console.log('Request resent successfully:', response);
+//           sendResponse({ success: true, ...response });
+//         })
+//         .catch(error => {
+//           console.error('Error resending request:', error);
+//           sendResponse({ success: false, error: error.message });
+//         });
+//       return true; // 保持消息通道开放，等待异步响应
       
-    default:
-      console.log('Unknown action:', message.action);
-      sendResponse({ success: false, error: 'Unknown action' });
-  }
-});
+//     default:
+//       console.log('Unknown action:', message.action);
+//       sendResponse({ success: false, error: 'Unknown action' });
+//   }
+// });
 
 // 重新发送修改后的请求
 async function resendRequest(request) {
