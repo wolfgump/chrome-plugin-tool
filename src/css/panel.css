@@ -1,0 +1,1049 @@
+/* Base Styles */
+body, html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  color: #333;
+  background-color: #f5f5f5;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Header Styles */
+.header {
+  background-color: #4285f4;
+  color: white;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  z-index: 10;
+}
+
+.header h1 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* App Container (New) */
+.app-container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Sidebar Navigation (New) */
+.sidebar {
+  width: 200px;
+  background-color: #f8f9fa;
+  border-right: 1px solid #dadce0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.tool-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+
+.nav-button {
+  display: block;
+  padding: 12px 16px;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #5f6368;
+  border-left: 3px solid transparent;
+  transition: all 0.2s;
+}
+
+.nav-button:hover {
+  background-color: #f1f3f4;
+  color: #202124;
+}
+
+.nav-button.active {
+  background-color: #e8f0fe;
+  color: #1a73e8;
+  border-left-color: #1a73e8;
+  font-weight: 500;
+}
+
+/* Tool Content Area (New) */
+.tool-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.tool-panel {
+  display: none;
+  flex: 1;
+  overflow: hidden;
+}
+
+.tool-panel.active {
+  display: flex;
+  flex-direction: column;
+}
+
+/* HTTP Recorder Tool */
+.http-recorder-header {
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+}
+
+/* 筛选器样式 */
+#methodFilter {
+  padding: 6px 10px;
+  background-color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  color: #333;
+  cursor: pointer;
+  appearance: menulist;
+}
+
+#methodFilter:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.3);
+}
+
+/* 按钮样式 */
+button {
+  background-color: #f1f3f4;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  color: #3c4043;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #e8eaed;
+}
+
+/* 禁用按钮样式 */
+button:disabled,
+button.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: #f1f3f4 !important;
+  color: #9aa0a6 !important;
+}
+
+.primary-button {
+  background-color: #1a73e8;
+  color: white;
+  font-weight: 500;
+  padding: 8px 16px;
+}
+
+.primary-button:hover {
+  background-color: #1765cc;
+}
+
+.secondary-button {
+  background-color: transparent;
+  color: #1a73e8;
+  border: 1px solid #dadce0;
+  padding: 7px 15px;
+}
+
+.secondary-button:hover {
+  background-color: rgba(26, 115, 232, 0.04);
+}
+
+input[type="text"] {
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  width: 200px;
+}
+
+/* Main Content Layout */
+.main-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.request-list-container {
+  width: 40%;
+  overflow-y: auto;
+  border-right: 1px solid #ddd;
+  background-color: white;
+}
+
+.request-details-container {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+/* Request Table */
+#requestTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#requestTable th {
+  text-align: left;
+  padding: 8px 10px;
+  background-color: #f1f3f4;
+  font-weight: 500;
+  border-bottom: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+}
+
+#requestTable td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #eee;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
+}
+
+#requestTable tr:hover {
+  background-color: #f1f3f4;
+  cursor: pointer;
+}
+
+#requestTable .selected {
+  background-color: #e8f0fe;
+}
+
+/* Method Colors */
+.method-get { color: #4caf50; }
+.method-post { color: #fb8c00; }
+.method-put { color: #2196f3; }
+.method-delete { color: #f44336; }
+.method-patch { color: #9c27b0; }
+.method-options { color: #607d8b; }
+
+/* Status Colors */
+.status-success { color: #4caf50; }
+.status-redirect { color: #fb8c00; }
+.status-client-error { color: #f44336; }
+.status-server-error { color: #d50000; }
+.status-pending { color: #9e9e9e; }
+
+/* Detail Tabs */
+.detail-tabs {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+  background-color: #f5f5f5;
+}
+
+.tab-button {
+  padding: 10px 15px;
+  background-color: transparent;
+  color: #333;
+  border: none;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.tab-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.tab-button.active {
+  border-bottom-color: #4285f4;
+  font-weight: 500;
+}
+
+/* Tab Content */
+.detail-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Modify Form Header */
+.modify-form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.modify-form-header h3 {
+  margin: 0;
+  color: #333;
+  font-size: 16px;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+/* Helper Text */
+.helper-text {
+  font-size: 12px;
+  color: #5f6368;
+  margin-bottom: 5px;
+  font-style: italic;
+}
+
+/* Section Styles */
+.section {
+  margin-bottom: 20px;
+}
+
+.section h3 {
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #5f6368;
+}
+
+/* Headers, Body Display */
+pre {
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-radius: 4px;
+  overflow: auto;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+  font-size: 12px;
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+.key-value-pair {
+  display: flex;
+  border-bottom: 1px solid #eee;
+  padding: 4px 0;
+}
+
+.key {
+  font-weight: 500;
+  width: 200px;
+  padding-right: 10px;
+  color: #5f6368;
+}
+
+.value {
+  flex: 1;
+  word-break: break-all;
+}
+
+/* Modify Form Styles */
+.full-width {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+  font-size: 12px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.full-width:focus {
+  outline: none;
+  border-color: #4285f4;
+  box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+}
+
+select {
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+select:focus {
+  outline: none;
+  border-color: #4285f4;
+  box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+}
+
+/* Response Section */
+.response-section {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+}
+
+/* 通知样式 */
+.notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  border-radius: 4px;
+  color: white;
+  font-weight: 500;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.notification.success {
+  background-color: #4caf50;
+}
+
+.notification.error {
+  background-color: #f44336;
+}
+
+.notification.warning {
+  background-color: #ff9800;
+}
+
+.notification.info {
+  background-color: #2196f3;
+}
+
+.notification.fadeout {
+  opacity: 0;
+}
+
+/* 无结果消息样式 */
+.no-results-message {
+  padding: 20px;
+  text-align: center;
+  color: #5f6368;
+  font-style: italic;
+  width: 100%;
+  display: block;
+}
+
+/* ---------- JSON Formatter Styles ---------- */
+
+.json-formatter-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 15px;
+  background-color: white;
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.json-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  flex-shrink: 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.json-toolbar h2 {
+  font-size: 18px;
+  margin: 0;
+  color: #202124;
+}
+
+/* 修改内容区域为左右布局 */
+.json-content-area {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  overflow: hidden;
+  gap: 20px; /* 增加间距 */
+  margin-top: 30px; /* 为标题预留空间 */
+}
+
+.json-editor {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 编辑器标题样式 */
+.json-editor h3 {
+  position: absolute;
+  top: -30px;
+  left: 0;
+  font-size: 14px;
+  margin: 0;
+  color: #5f6368;
+  z-index: 1;
+}
+
+#json-input {
+  width: 100%;
+  height: 100%;
+  min-height: 150px;
+  padding: 10px;
+  box-sizing: border-box;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+  font-size: 13px;
+  border: 1px solid #dadce0;
+  border-radius: 4px;
+  resize: none;
+  overflow: auto;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+#json-input:focus {
+  outline: none;
+  border-color: #4285f4;
+  box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+}
+
+.json-output-container {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 改变标题样式，使其不占用垂直空间 */
+.json-output-container h3 {
+  position: absolute;
+  top: -30px;
+  left: 0;
+  font-size: 14px;
+  margin: 0;
+  color: #5f6368;
+  z-index: 1;
+}
+
+#json-output {
+  flex: 1;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+  font-size: 13px;
+  overflow: auto;
+  padding: 10px;
+  white-space: pre-wrap;
+  color: #202124;
+  border: 1px solid #dadce0;
+  min-height: 200px;
+  height: 100%; /* 修改高度计算 */
+  word-break: break-word;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* JSON syntax highlighting - 增强版 */
+.json-key {
+  color: #0451a5;  /* 深蓝色，类似VSCode的键名颜色 */
+  font-weight: 500;
+}
+
+.json-value-string {
+  color: #008000;  /* 绿色字符串 */
+}
+
+.json-value-number {
+  color: #098658;  /* 暗绿色数字 */
+}
+
+.json-value-boolean {
+  color: #0000ff;  /* 蓝色布尔值 */
+  font-weight: 500;
+}
+
+.json-value-null {
+  color: #0000ff;  /* 蓝色null */
+  font-weight: 500;
+}
+
+.json-bracket {
+  color: #000000;  /* 黑色括号 */
+  font-weight: 400;
+}
+
+.json-punctuation {
+  color: #000000;  /* 黑色标点符号 */
+}
+
+/* 缩进指示线 */
+.indent-guide {
+  display: inline-block;
+  width: 20px;
+  position: relative;
+}
+
+.indent-guide::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 10px;
+  border-left: 1px dotted #ccc;
+  height: 100%;
+}
+
+/* 美化输出容器 */
+#json-output {
+  line-height: 1.5;
+  padding: 15px;
+  counter-reset: line;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: 'Consolas', 'Monaco', 'Menlo', monospace;
+  font-size: 13px;
+  tab-size: 2;
+  -moz-tab-size: 2;
+}
+
+/* JSON格式化工具容器额外样式 */
+.json-formatter-container {
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 让JSON输入输出区域更加美观 */
+#json-input, #json-output {
+  border-radius: 4px;
+  border: 1px solid #dadce0;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#json-input:focus {
+  border-color: #4285f4;
+  box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+  outline: none;
+}
+
+#json-output {
+  background-color: #f8f9fa;
+  position: relative;
+}
+
+/* 行号样式 */
+.json-with-line-numbers {
+  width: 100%;
+  font-family: 'Consolas', 'Monaco', 'Menlo', monospace;
+}
+
+.json-line {
+  display: flex;
+  line-height: 1.5;
+}
+
+.json-line:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.line-number {
+  min-width: 40px;
+  padding-right: 12px;
+  text-align: right;
+  color: #999;
+  user-select: none;
+  border-right: 1px solid #eee;
+  margin-right: 12px;
+}
+
+.line-content {
+  flex: 1;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* 调整JSON输出区域的样式适配行号 */
+#json-output.with-line-numbers {
+  padding: 0;
+  overflow-x: auto;
+}
+
+/* JSON语法高亮颜色优化 */
+.json-key {
+  color: #0451a5;  /* 深蓝色，类似VSCode的键名颜色 */
+  font-weight: 500;
+}
+
+.json-value-string {
+  color: #a31515;  /* 暗红色字符串，类似VSCode */
+}
+
+.json-value-number {
+  color: #098658;  /* 暗绿色数字 */
+}
+
+.json-value-boolean {
+  color: #0000ff;  /* 蓝色布尔值 */
+  font-weight: 500;
+}
+
+.json-value-null {
+  color: #0000ff;  /* 蓝色null */
+  font-weight: 500;
+}
+
+/* 收起/展开功能的样式 */
+.collapsible .json-bracket {
+  cursor: pointer;
+}
+
+.collapsible .json-bracket:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+}
+
+/* 增加间距，让JSON看起来更易读 */
+.json-line {
+  padding: 1px 0;
+}
+
+/* ---------- AI API测试工具样式 ---------- */
+
+.ai-tester-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 15px;
+  background-color: white;
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.ai-tester-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  flex-shrink: 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.ai-tester-header h2 {
+  font-size: 18px;
+  margin: 0;
+  color: #202124;
+}
+
+.ai-tester-content {
+  display: flex;
+  flex: 1;
+  gap: 20px;
+  overflow: hidden;
+  min-height: 500px;
+}
+
+/* 输入区域样式 */
+.ai-tester-input {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.api-config-section, .prompt-section {
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  padding: 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #5f6368;
+  font-size: 14px;
+}
+
+.token-input-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-button {
+  padding: 6px 12px;
+  background-color: #f1f3f4;
+  font-size: 12px;
+}
+
+.range-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.range-container input[type="range"] {
+  flex: 1;
+}
+
+.range-container span {
+  min-width: 30px;
+  text-align: right;
+  font-size: 14px;
+  color: #5f6368;
+}
+
+/* 输出区域样式 */
+.ai-tester-output {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.ai-tester-output h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #5f6368;
+  font-size: 14px;
+}
+
+.response-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.response-tabs {
+  display: flex;
+  background-color: #f1f3f4;
+  border-bottom: 1px solid #dadce0;
+}
+
+.response-tabs .tab-button {
+  padding: 8px 16px;
+  font-size: 13px;
+}
+
+.ai-response {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  line-height: 1.5;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 14px;
+  color: #202124;
+}
+
+.raw-response {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+  font-size: 13px;
+  color: #202124;
+  background-color: #f8f9fa;
+  margin: 0;
+}
+
+.response-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 12px;
+  color: #5f6368;
+  padding: 8px 12px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  border: 1px solid #dadce0;
+}
+
+.meta-item {
+  display: flex;
+  gap: 15px;
+}
+
+/* 历史记录部分 */
+.ai-tester-history {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.ai-tester-history h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #5f6368;
+  font-size: 14px;
+}
+
+.history-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.history-item {
+  padding: 8px 12px;
+  background-color: #f1f3f4;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background-color 0.2s;
+}
+
+.history-item:hover {
+  background-color: #e8eaed;
+}
+
+/* AI测试工具的额外样式 */
+.ai-response code {
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+  font-size: 90%;
+}
+
+.ai-response pre.code-block {
+  background-color: #f5f5f5;
+  padding: 12px;
+  border-radius: 4px;
+  border-left: 3px solid #1a73e8;
+  margin: 10px 0;
+  overflow-x: auto;
+}
+
+.ai-response pre.code-block code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  display: block;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.ai-response h1, .ai-response h2, .ai-response h3 {
+  color: #202124;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.ai-response h1 {
+  font-size: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+}
+
+.ai-response h2 {
+  font-size: 18px;
+}
+
+.ai-response h3 {
+  font-size: 16px;
+}
+
+.ai-response a {
+  color: #1a73e8;
+  text-decoration: none;
+}
+
+.ai-response a:hover {
+  text-decoration: underline;
+}
+
+.ai-tester-output .loading {
+  color: #5f6368;
+  font-style: italic;
+  padding: 15px;
+  text-align: center;
+}
+
+.ai-tester-output .error {
+  color: #d93025;
+  background-color: rgba(217, 48, 37, 0.05);
+  padding: 10px 15px;
+  border-radius: 4px;
+  border-left: 3px solid #d93025;
+  margin: 10px 0;
+}
+
+.history-list .no-history {
+  color: #5f6368;
+  font-style: italic;
+  text-align: center;
+  padding: 10px;
+}
+
+.button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.button.recording {
+  background-color: #dc3545;
+  color: white;
+}
+
+.button.recording:hover {
+  background-color: #c82333;
+}
+
+.button.paused {
+  background-color: #28a745;
+  color: white;
+}
+
+.button.paused:hover {
+  background-color: #218838;
+} 

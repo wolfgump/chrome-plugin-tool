@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>开发工具集</title>
+  <link rel="stylesheet" href="../css/panel.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>开发工具集</h1>
+      <div class="controls">
+        <!-- 全局控制按钮放在这里 -->
+      </div>
+    </div>
+    
+    <div class="app-container">
+      <!-- 侧边导航菜单 -->
+      <div class="sidebar">
+        <div class="tool-nav">
+          <button class="nav-button active" data-tool="json-formatter">JSON 格式化</button>
+          <button class="nav-button" data-tool="http-recorder">HTTP 请求记录</button>
+          <button class="nav-button" data-tool="ai-api-tester">AI api测试</button>
+          <!-- 未来可以在这里添加更多工具按钮 -->
+        </div>
+      </div>
+      
+      <!-- 工具内容区域 -->
+      <div class="tool-content">
+        <!-- JSON 格式化工具 -->
+        <div class="tool-panel active" id="json-formatter-tool">
+          <div class="json-formatter-container">
+            <div class="json-toolbar">
+              <h2>JSON 格式化工具</h2>
+              <div class="button-group">
+                <button id="format-json" class="primary-button">格式化</button>
+                <button id="remove-escapes" class="secondary-button">去除转义</button>
+                <button id="url-decode" class="secondary-button">URL解码</button>
+                <button id="clear-json" class="secondary-button">清空</button>
+                <button id="copy-json" class="secondary-button">复制</button>
+              </div>
+            </div>
+            <!-- 添加json-content-area容器，用于左右布局 -->
+            <div class="json-content-area">
+              <div class="json-editor">
+                <h3>JSON文本</h3>
+                <textarea id="json-input" placeholder="在此粘贴JSON文本..."></textarea>
+              </div>
+              <div class="json-output-container">
+                <h3>格式化结果</h3>
+                <pre id="json-output"></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- HTTP 请求记录工具 -->
+        <div class="tool-panel" id="http-recorder-tool">
+          <div class="http-recorder-header">
+            <div class="controls">
+              <button id="recording-toggle" class="button recording">暂停记录</button>
+              <select id="methodFilter" aria-label="按HTTP方法筛选">
+                <option value="ALL">所有方法</option>
+                <option value="GET">GET</option>
+                <option value="POST">POST</option>
+                <option value="PUT">PUT</option>
+                <option value="DELETE">DELETE</option>
+                <option value="PATCH">PATCH</option>
+                <option value="OPTIONS">OPTIONS</option>
+                <option value="HEAD">HEAD</option>
+              </select>
+              <button id="clearButton">清除全部</button>
+              <input type="text" id="filterInput" placeholder="过滤请求...">
+            </div>
+          </div>
+          
+          <div class="main-content">
+            <div class="request-list-container">
+              <table id="requestTable">
+                <thead>
+                  <tr>
+                    <th>Method</th>
+                    <th>Status</th>
+                    <th>URL</th>
+                    <th>Type</th>
+                    <th>Time</th>
+                  </tr>
+                </thead>
+                <tbody id="requestList"></tbody>
+              </table>
+            </div>
+            
+            <div class="request-details-container">
+              <div class="detail-tabs">
+                <button class="tab-button active" data-tab="headers">Headers</button>
+                <button class="tab-button" data-tab="request">Request</button>
+                <button class="tab-button" data-tab="response">Response</button>
+                <button class="tab-button" data-tab="modify">Modify & Resend</button>
+              </div>
+              
+              <div class="detail-content">
+                <div class="tab-content active" id="headers-tab">
+                  <div class="section">
+                    <h3>General</h3>
+                    <div id="general-info"></div>
+                  </div>
+                  <div class="section">
+                    <h3>Request Headers</h3>
+                    <div id="request-headers"></div>
+                  </div>
+                  <div class="section">
+                    <h3>Response Headers</h3>
+                    <div id="response-headers"></div>
+                  </div>
+                </div>
+                
+                <div class="tab-content" id="request-tab">
+                  <div class="section">
+                    <h3>Request Body</h3>
+                    <div id="request-body-container">
+                      <pre id="request-body"></pre>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="tab-content" id="response-tab">
+                  <div class="section">
+                    <h3>Response Body</h3>
+                    <div id="response-body-container">
+                      <pre id="response-body"></pre>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="tab-content" id="modify-tab">
+                  <div class="modify-form-header">
+                    <h3>修改并重新发送请求</h3>
+                    <div class="button-group">
+                      <button id="reset-request" class="secondary-button">重置为原始请求</button>
+                    </div>
+                  </div>
+                  
+                  <div class="section">
+                    <h3>URL</h3>
+                    <input type="text" id="modify-url" class="full-width" placeholder="请求URL">
+                  </div>
+                  
+                  <div class="section">
+                    <h3>Method</h3>
+                    <select id="modify-method">
+                      <option value="GET">GET</option>
+                      <option value="POST">POST</option>
+                      <option value="PUT">PUT</option>
+                      <option value="DELETE">DELETE</option>
+                      <option value="PATCH">PATCH</option>
+                      <option value="OPTIONS">OPTIONS</option>
+                      <option value="HEAD">HEAD</option>
+                    </select>
+                  </div>
+                  
+                  <div class="section">
+                    <h3>Request Headers</h3>
+                    <div class="helper-text">每行一个请求头，格式为 "Header-Name: value"</div>
+                    <div id="modify-headers-container">
+                      <textarea id="modify-headers" rows="5" class="full-width" placeholder="Content-Type: application/json"></textarea>
+                    </div>
+                  </div>
+                  
+                  <div class="section">
+                    <h3>Request Body</h3>
+                    <div class="helper-text">JSON数据会自动格式化</div>
+                    <div id="modify-body-container">
+                      <textarea id="modify-body" rows="10" class="full-width" placeholder="请求体数据"></textarea>
+                    </div>
+                  </div>
+                  
+                  <div class="section">
+                    <button id="send-request" class="primary-button">发送请求</button>
+                  </div>
+                  
+                  <div class="section response-section" id="modified-response-section" style="display: none;">
+                    <h3>Response</h3>
+                    <div id="modified-response-status"></div>
+                    <div class="modified-response-tabs tabs">
+                      <button class="tab-button active" data-tab="modified-response-headers">Headers</button>
+                      <button class="tab-button" data-tab="modified-response-body">Body</button>
+                    </div>
+                    <div class="tab-content active" id="modified-response-headers-tab">
+                      <pre id="modified-response-headers"></pre>
+                    </div>
+                    <div class="tab-content" id="modified-response-body-tab">
+                      <pre id="modified-response-body"></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- AI api测试工具 -->
+        <div class="tool-panel" id="ai-api-tester-tool">
+          <div class="ai-tester-container">
+            <div class="ai-tester-header">
+              <h2>AI api测试工具</h2>
+              <div class="button-group">
+                <button id="send-api-request" class="primary-button">发送请求</button>
+                <button id="clear-api-form" class="secondary-button">清空</button>
+                <button id="save-api-settings" class="secondary-button">保存设置</button>
+              </div>
+            </div>
+            
+            <div class="ai-tester-content">
+              <!-- 左侧：API配置和输入 -->
+              <div class="ai-tester-input">
+                <div class="api-config-section">
+                  <h3>API配置</h3>
+                  
+                  <div class="form-group">
+                    <label for="api-provider">API提供商</label>
+                    <select id="api-provider" class="full-width">
+                      <option value="custom">自定义</option>
+                      <option value="openai">OpenAI</option>
+                      <option value="meituan">美团</option>
+                      <option value="azure">Azure OpenAI</option>
+                      <option value="anthropic">Anthropic (Claude)</option>
+                      <option value="baidu">百度文心一言</option>
+                      <option value="zhipu">智谱AI</option>
+                    </select>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="api-endpoint">API端点</label>
+                    <input type="text" id="api-endpoint" class="full-width" placeholder="https://api.example.com/v1/chat/completions">
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="api-key">API令牌 (Token/Key)</label>
+                    <div class="token-input-container">
+                      <input type="password" id="api-key" class="full-width" placeholder="输入您的API密钥" >
+                      <button id="toggle-token-visibility" class="icon-button">显示</button>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="model-name">模型</label>
+                    <select id="model-name" class="full-width">
+                      <option value="gpt-4o-mini">GPT-4o mini</option>
+                      <option value="gpt-4o">GPT-4o</option>
+                      <option value="gpt-4">GPT-4</option>
+                      <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+                      <option value="claude-3-opus">Claude 3 Opus</option>
+                      <option value="claude-3-sonnet">Claude 3 Sonnet</option>
+                      <option value="ernie-bot-4">文心一言ERNIE Bot 4</option>
+                      <option value="glm-4">智谱GLM-4</option>
+                      <option value="custom">自定义模型名称</option>
+                    </select>
+                    <input type="text" id="custom-model-name" class="full-width" placeholder="输入自定义模型名称" style="display: none; margin-top: 8px;">
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="temperature">Temperature</label>
+                    <div class="range-container">
+                      <input type="range" id="temperature" min="0" max="2" step="0.1" value="0.7">
+                      <span id="temperature-value">0.7</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="prompt-section">
+                  <h3>系统消息 (System)</h3>
+                  <textarea id="system-message" rows="4" class="full-width" placeholder="输入系统指令..."></textarea>
+                  
+                  <h3>用户消息 (Prompt)</h3>
+                  <textarea id="user-message" rows="6" class="full-width" placeholder="输入您的提示词..."></textarea>
+                </div>
+              </div>
+              
+              <!-- 右侧：API响应 -->
+              <div class="ai-tester-output">
+                <h3>响应结果</h3>
+                <div class="response-container">
+                  <div class="response-tabs">
+                    <button class="tab-button active" data-tab="formatted-response">格式化结果</button>
+                    <button class="tab-button" data-tab="raw-response">原始JSON</button>
+                  </div>
+                  <div class="tab-content active" id="formatted-response-tab">
+                    <div id="ai-response-content" class="ai-response"></div>
+                  </div>
+                  <div class="tab-content" id="raw-response-tab">
+                    <pre id="raw-response-content" class="raw-response"></pre>
+                  </div>
+                </div>
+                
+                <div class="response-meta">
+                  <div id="response-tokens" class="meta-item">
+                    <span>输入: 0 tokens</span>
+                    <span>输出: 0 tokens</span>
+                    <span>总计: 0 tokens</span>
+                  </div>
+                  <div id="response-time" class="meta-item">
+                    <span>响应时间: 0ms</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="ai-tester-history">
+              <h3>历史记录</h3>
+              <div id="api-history-list" class="history-list">
+                <!-- 历史记录将在这里动态生成 -->
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 为未来工具预留的空间 -->
+        <!-- <div class="tool-panel" id="future-tool">...</div> -->
+      </div>
+    </div>
+  </div>
+  
+  <script src="../js/panel.js"></script>
+  <script src="../js/json-formatter.js"></script>
+  <script src="../js/ai-api-tester.js"></script>
+</body>
+</html> 

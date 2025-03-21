@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "开发者工具集",
+  "version": "1.0",
+  "description": "集成多种开发工具，包含HTTP请求记录、JSON格式化等功能",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "tabs",
+    "activeTab",
+    "clipboardWrite"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "src/js/background.js"
+  },
+  "action": {
+    "default_icon": {
+      "16": "src/images/icon16.png",
+      "48": "src/images/icon48.png",
+      "128": "src/images/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "src/images/icon16.png",
+    "48": "src/images/icon48.png",
+    "128": "src/images/icon128.png"
+  },
+  "devtools_page": "src/html/devtools.html"
+} 
