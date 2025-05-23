@@ -2,17 +2,62 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=panel.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>开发者工具集</title>
-  <script>
-    // 立即重定向，不等待页面加载
-    window.location.href = "panel.html";
-  </script>
+  <style>
+    body {
+      width: 300px;
+      padding: 20px;
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      background-color: #f8f9fa;
+    }
+    .container {
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+    .tool-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .tool-button {
+      padding: 12px;
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .tool-button:hover {
+      background-color: #3367d6;
+    }
+    .description {
+      font-size: 12px;
+      color: #666;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
-  <!-- 页面将自动重定向，不会显示以下内容 -->
-  <div style="text-align: center; padding: 20px;">
-    正在加载工具面板...
+  <div class="container">
+    <h1>开发者工具集</h1>
+    <div class="tool-buttons">
+      <button id="openJsonTool" class="tool-button">JSON 格式化工具</button>
+      <button id="openAiTool" class="tool-button">AI 接口测试工具</button>
+      <button id="openFullPanel" class="tool-button">打开完整面板</button>
+    </div>
+    <div class="description">
+      选择要使用的工具
+    </div>
   </div>
+
+  <script src="../js/popup.js"></script>
 </body>
 </html> 

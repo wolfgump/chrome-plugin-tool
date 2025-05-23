@@ -18,6 +18,7 @@
     "service_worker": "src/js/background.js"
   },
   "action": {
+    "default_popup": "src/html/popup.html",
     "default_icon": {
       "16": "src/images/icon16.png",
       "48": "src/images/icon48.png",
